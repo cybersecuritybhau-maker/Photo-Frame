@@ -3,25 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reunion Photo Tool</title>
+    <title>Reunion Photo Frame Studio</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>Reunion Photo Maker</h1>
-        <p>Auto-fit your photo into the official frame</p>
+        <h1>Reunion Photo Studio</h1>
         
+        <div class="control-group">
+            <label>Choose Frame Design:</label>
+            <select id="frameSelect">
+                <option value="frame1.png">Frame Design 1</option>
+                <option value="frame2.png">Frame Design 2</option>
+                <option value="frame3.png">Frame Design 3</option>
+            </select>
+        </div>
+
         <div class="upload-section">
             <input type="file" id="imageUpload" accept="image/*" class="file-input">
-            <label for="imageUpload" class="custom-file-upload">Choose Your Photo</label>
+            <label for="imageUpload" class="custom-file-upload">Upload Your Photo</label>
         </div>
         
         <div class="canvas-wrapper">
             <canvas id="outputCanvas"></canvas>
-            <div id="placeholderText">Your photo will appear here</div>
+            <div id="placeholder">Your Preview Will Appear Here</div>
         </div>
 
         <button id="downloadBtn" style="display:none;">Download 4K Photo</button>
+
+        <footer>
+            <p>This site build by Nagib</p>
+        </footer>
     </div>
     <script src="script.js"></script>
 </body>
