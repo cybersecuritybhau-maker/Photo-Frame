@@ -1,34 +1,15 @@
-body { 
-    font-family: 'Segoe UI', sans-serif; 
-    display: flex; justify-content: center; align-items: center; 
-    min-height: 100vh; background: #f4f4f4; margin: 0; 
-}
-.container { 
-    text-align: center; background: white; padding: 30px; 
-    border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
-    width: 90%; max-width: 450px;
-}
-.custom-file-upload {
-    display: inline-block; padding: 12px 30px; background: #e63946;
-    color: white; border-radius: 50px; cursor: pointer; font-weight: bold;
-    margin-bottom: 20px; transition: 0.3s;
-}
+body { font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; background: #f0f2f5; margin: 0; }
+.container { text-align: center; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 95%; max-width: 450px; }
+h1 { color: #1d3557; margin-bottom: 20px; }
+.control-group { margin-bottom: 20px; text-align: left; }
+select { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ddd; outline: none; }
+.custom-file-upload { display: block; background: #e63946; color: white; padding: 15px; border-radius: 50px; font-weight: bold; cursor: pointer; margin-bottom: 20px; transition: 0.3s; }
 .custom-file-upload:hover { background: #c12a36; }
 .file-input { display: none; }
-
-.canvas-wrapper { 
-    position: relative; width: 100%; aspect-ratio: 1 / 1; 
-    background: #fafafa; border: 2px dashed #ddd; 
-    margin-bottom: 20px; border-radius: 10px; overflow: hidden;
-}
+.canvas-wrapper { position: relative; width: 100%; aspect-ratio: 1/1; background: #fafafa; border: 2px dashed #ccc; border-radius: 15px; overflow: hidden; margin-bottom: 20px; }
 #outputCanvas { width: 100%; height: 100%; display: block; }
-#placeholderText {
-    position: absolute; top: 50%; left: 50%; 
-    transform: translate(-50%, -50%); color: #aaa;
-}
-
-#downloadBtn { 
-    background: #1d3557; color: white; border: none; 
-    padding: 15px; border-radius: 10px; cursor: pointer; 
-    width: 100%; font-size: 18px; font-weight: bold;
-}
+#placeholder { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #888; pointer-events: none; }
+#downloadBtn { background: #1d3557; color: white; border: none; padding: 15px; border-radius: 12px; cursor: pointer; width: 100%; font-size: 18px; font-weight: bold; transition: 0.3s; }
+#downloadBtn:hover { background: #457b9d; }
+footer { margin-top: 25px; border-top: 1px solid #eee; padding-top: 15px; }
+footer p { color: #555; font-weight: 500; font-size: 14px; }
