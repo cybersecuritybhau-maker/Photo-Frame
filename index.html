@@ -3,33 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI 4K Photo Studio</title>
+    <title>Reunion Photo Tool</title>
     <link rel="stylesheet" href="style.css">
-    <script defer src="https://cdn.jsdelivr.net/npm/@vladmandic/face-api/dist/face-api.js"></script>
 </head>
 <body>
     <div class="container">
-        <h1>AI Photo Studio</h1>
+        <h1>Reunion Photo Maker</h1>
+        <p>Auto-fit your photo into the official frame</p>
         
-        <div class="input-group">
-            <label>Select Frame:</label>
-            <select id="frameSelect">
-                <option value="frame1.png">Official Reunion Frame</option>
-                <option value="frame2.png">Alternative Design</option>
-                </select>
-        </div>
-
         <div class="upload-section">
             <input type="file" id="imageUpload" accept="image/*" class="file-input">
-            <label for="imageUpload" class="custom-file-upload">Upload Your Photo</label>
+            <label for="imageUpload" class="custom-file-upload">Choose Your Photo</label>
         </div>
         
         <div class="canvas-wrapper">
             <canvas id="outputCanvas"></canvas>
-            <div id="loader" class="loader">Processing AI Face Match...</div>
+            <div id="placeholderText">Your photo will appear here</div>
         </div>
 
-        <button id="downloadBtn">Download 4K Photo</button>
+        <button id="downloadBtn" style="display:none;">Download 4K Photo</button>
     </div>
     <script src="script.js"></script>
 </body>
