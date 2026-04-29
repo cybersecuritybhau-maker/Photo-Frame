@@ -1,58 +1,65 @@
 const imageUpload = document.getElementById('imageUpload');
+const frameSelect = document.getElementById('frameSelect');
 const canvas = document.getElementById('outputCanvas');
 const ctx = canvas.getContext('2d');
 const downloadBtn = document.getElementById('downloadBtn');
-const placeholderText = document.getElementById('placeholderText');
+const placeholder = document.getElementById('placeholder');
 
-// 4K Resolution (Square)
-const SIZE = 3000; 
-const frameImg = new Image();
-frameImg.src = 'frame.png'; // আপনার ফ্রেমের নাম frame.png হতে হবে
+const SIZE = 3000; // 4K Resolution
 
-imageUpload.addEventListener('change', (e) => {
+imageUpload.addEventListener('change', function(e) {
     const file = e.target.files[0];
     if (!file) return;
 
     const reader = new FileReader();
-    reader.onload = (event) => {
-        const img = new Image();
-        img.onload = () => {
-            placeholderText.style.display = 'none';
-            canvas.width = SIZE;
-            canvas.height = SIZE;
+    reader.onload = function(event) {
+        const userImg = new Image();
+        userImg.onload = function() {
+            const frameImg = new Image();
+            frameImg.src = frameSelect.value;
 
-            // ছবির মাঝখানের অংশ বের করার লজিক (Auto Center Fit)
-            let sourceX, sourceY, sourceSize;
-            if (img.width > img.height) {
-                sourceSize = img.height;
-                sourceX = (img.width - img.height) / 2;
-                sourceY = 0;
-            } else {
-                sourceSize = img.width;
-                sourceX = 0;
-                sourceY = (img.height - img.width) / 3; // মুখ উপরে থাকে তাই ১/৩ অংশ ফোকাস
-            }
+            frameImg.onload = function() {
+                placeholder.style.display = 'none';
+                canvas.width = SIZE;
+                canvas.height = SIZE;
 
-            // হাই কোয়ালিটি রেন্ডারিং
-            ctx.imageSmoothingEnabled = true;
-            ctx.imageSmoothingQuality = 'high';
+                // Smart Crop Logic (Auto-Fit)
+                let sourceX, sourceY, sourceSize;
+                const ratio = userImg.width / userImg.height;
 
-            // ১. ইউজারের ছবি ড্র করা
-            ctx.drawImage(img, sourceX, sourceY, sourceSize, sourceSize, 0, 0, SIZE, SIZE);
-            
-            // ২. ফ্রেমটি উপরে বসানো
-            ctx.drawImage(frameImg, 0, 0, SIZE, SIZE);
+                if (ratio > 1) {
+                    sourceSize = userImg.height;
+                    sourceX = (userImg.width - userImg.height) / 2;
+                    sourceY = 0;
+                } else {
+                    sourceSize = userImg.width;
+                    sourceX = 0;
+                    sourceY = (userImg.height - userImg.width) / 3; // Focus on face
+                }
 
-            downloadBtn.style.display = 'block';
+                ctx.imageSmoothingEnabled = true;
+                ctx.imageSmoothingQuality = 'high';
+
+                // ১. ইউজারের ছবি আঁকা
+                ctx.drawImage(userImg, sourceX, sourceY, sourceSize, sourceSize, 0, 0, SIZE, SIZE);
+                
+                // ২. নির্বাচিত ফ্রেমটি আঁকা
+                ctx.drawImage(frameImg, 0, 0, SIZE, SIZE);
+
+                downloadBtn.style.display = 'block';
+            };
+            // ফ্রেম লোড না হলে এরর হ্যান্ডলিং
+            frameImg.onerror = () => alert("Frame file not found! Make sure frame names match.");
         };
-        img.src = event.target.result;
+        userImg.src = event.target.result;
     };
     reader.readAsDataURL(file);
 });
 
-downloadBtn.onclick = () => {
+// ডাউনলোড ফাংশন
+downloadBtn.addEventListener('click', function() {
     const link = document.createElement('a');
-    link.download = 'Reunion_Photo_4K.png';
+    link.download = 'Nagib_Studio_Photo.png';
     link.href = canvas.toDataURL('image/png', 1.0);
     link.click();
-};
+});
